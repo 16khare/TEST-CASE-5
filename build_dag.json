@@ -4,7 +4,7 @@
         "artifactId": "My-app-test",
         "version": "1.0-SNAPSHOT",
         "dependencies": [],
-        "path": "/home/runner/work/TEST_CASE_4/TEST_CASE_4",
+        "path": "/home/runner/work/TEST-CASE-5/TEST-CASE-5",
         "buildCommand": "mvn clean install"
     },
     "None:Module1:None": {
@@ -18,7 +18,7 @@
                 "version": "1.0-SNAPSHOT"
             }
         ],
-        "path": "/home/runner/work/TEST_CASE_4/TEST_CASE_4/Module1",
+        "path": "/home/runner/work/TEST-CASE-5/TEST-CASE-5/Module1",
         "buildCommand": "mvn clean install"
     },
     "None:Module2:None": {
@@ -26,7 +26,7 @@
         "artifactId": "Module2",
         "version": null,
         "dependencies": [],
-        "path": "/home/runner/work/TEST_CASE_4/TEST_CASE_4/Module2",
+        "path": "/home/runner/work/TEST-CASE-5/TEST-CASE-5/Module2",
         "buildCommand": "mvn clean install"
     },
     "None:Module3:None": {
@@ -40,7 +40,7 @@
                 "version": "1.0-SNAPSHOT"
             }
         ],
-        "path": "/home/runner/work/TEST_CASE_4/TEST_CASE_4/Module3",
+        "path": "/home/runner/work/TEST-CASE-5/TEST-CASE-5/Module3",
         "buildCommand": "mvn clean install"
     },
     "None:Module4:None": {
@@ -54,7 +54,7 @@
                 "version": "1.0-SNAPSHOT"
             }
         ],
-        "path": "/home/runner/work/TEST_CASE_4/TEST_CASE_4/Module4",
+        "path": "/home/runner/work/TEST-CASE-5/TEST-CASE-5/Module4",
         "buildCommand": "mvn clean install"
     }
 }
