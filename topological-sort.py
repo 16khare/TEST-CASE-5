@@ -23,7 +23,7 @@ sorted_nodes = [node for node in order if node in G]
 sorted_modules = list(nx.topological_sort(G.subgraph(sorted_nodes)))
 
 # Print the sorted modules and their paths to a text file
-with open('sorted_modules_with_paths.txt', 'w') as f:
+with open('sorted_modules_with_paths.txt', 'a') as f:
     for module in sorted_modules:
         path = G.nodes[module].get('path', '')  # Retrieve the path information for the module, default to empty string if 'path' is missing
         f.write(f"{module} - Path: {path}\n")
