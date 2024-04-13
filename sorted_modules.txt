@@ -1,0 +1,8 @@
+My-app:My-app-test:1.0-SNAPSHOT
+Module2
+None:Module2:None
+Module1
+Module3
+None:Module1:None
+None:Module3:None
+None:Module4:None
