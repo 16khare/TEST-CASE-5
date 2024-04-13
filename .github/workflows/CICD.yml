@@ -99,4 +99,4 @@ jobs:
                       pip install GitPython
             
                   - name: Run build modules script
-                    run: python build.py    
+                    run: python Build.py    
