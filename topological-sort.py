@@ -9,30 +9,24 @@ with open('build_dag.json') as f:
 G = nx.DiGraph()
 
 # Add nodes and edges to the graph
-order = []
 for module, data in modules.items():
-    G.add_node(module, path=data.get('path', ''))  # Add path information to the node, default to empty string if 'path' is missing
+    # Add node with path information
+    G.add_node(module, path=data.get('path', '')) # Default to empty string if 'path' is missing
+    # Add edges for dependencies
     for dependency in data['dependencies']:
         G.add_edge(dependency['artifactId'], module)
-    order.append(module)
 
-# Sort nodes based on the custom order
-sorted_nodes = [node for node in order if node in G]
-
-# Perform topological sort on the sorted nodes
-sorted_nodes_with_paths = [(node, G.nodes[node]['path']) for node in sorted_nodes]
-sorted_modules = list(nx.topological_sort(G.subgraph(sorted_nodes)))
+# Perform topological sort on the graph
+# This step ensures that the modules are sorted in a way that dependencies are built before the modules that depend on them
+sorted_modules = list(nx.topological_sort(G))
 
 # Create a list of tuples containing the sorted modules and their path information
 sorted_modules_with_paths = [(module, G.nodes[module]['path']) for module in sorted_modules]
 
 # Print the sorted modules and their paths to a text file
-with open('sorted_modules_with_paths.txt', 'a') as f:
+with open('sorted_modules_with_paths.txt', 'w') as f: # Use 'w' mode to overwrite the file
     for module, path in sorted_modules_with_paths:
         f.write(f"{module} - Path: {path}\n")
-
-# You can also include additional information like build commands if needed
-
 
 
 
