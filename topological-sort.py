@@ -10,7 +10,7 @@ G = nx.DiGraph()
 
 # Add nodes and edges to the graph
 for module, data in modules.items():
-    G.add_node(module, path=data['path'])  # Add path information to the node
+    G.add_node(module, path=data.get('path', ''))  # Add path information to the node, default to empty string if 'path' is missing
     for dependency in data['dependencies']:
         G.add_edge(dependency['artifactId'], module)
 
@@ -20,7 +20,7 @@ sorted_modules = list(nx.topological_sort(G))
 # Print the sorted modules and their paths to a text file
 with open('sorted_modules_with_paths.txt', 'w') as f:
     for module in sorted_modules:
-        path = G.nodes[module]['path']  # Retrieve the path information for the module
+        path = G.nodes[module].get('path', '')  # Retrieve the path information for the module, default to empty string if 'path' is missing
         f.write(f"{module} - Path: {path}\n")
 
 # You can also include additional information like build commands if needed
