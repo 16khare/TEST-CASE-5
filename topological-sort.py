@@ -20,6 +20,7 @@ for module, data in modules.items():
 sorted_nodes = [node for node in order if node in G]
 
 # Perform topological sort on the sorted nodes
+sorted_nodes_with_paths = [(node, G.nodes[node]['path']) for node in sorted_nodes]
 sorted_modules = list(nx.topological_sort(G.subgraph(sorted_nodes)))
 
 # Create a list of tuples containing the sorted modules and their path information
