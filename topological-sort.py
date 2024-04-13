@@ -16,8 +16,11 @@ for module, data in modules.items():
         G.add_edge(dependency['artifactId'], module)
     order.append(module)
 
-# Perform topological sort based on the custom order
-sorted_modules = list(nx.topological_sort(G, order=order))
+# Sort nodes based on the custom order
+sorted_nodes = [node for node in order if node in G]
+
+# Perform topological sort on the sorted nodes
+sorted_modules = list(nx.topological_sort(G.subgraph(sorted_nodes)))
 
 # Print the sorted modules and their paths to a text file
 with open('sorted_modules_with_paths.txt', 'w') as f:
