@@ -1,4 +1,5 @@
 import json
+import os  # Import the os module
 import subprocess
 
 def build_module(module):
@@ -14,15 +15,14 @@ def build_module(module):
         print(f"Module {artifact_id} has already been built.")
         return
 
-    
     # Capture the output of the build command
     result = subprocess.run(command, shell=True, capture_output=True, text=True)
-    
+
     if result.returncode == 0:
-        print(f"Module {module} built successfully.")
+        print(f"Module {artifact_id} built successfully.")
         print(result.stdout)  # Print the build output
     else:
-        print(f"Error building module {module}.")
+        print(f"Error building module {artifact_id}.")
         print(result.stderr)  # Print any error output
 
 with open("sorted_modules.txt") as f:
