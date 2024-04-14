@@ -10,11 +10,12 @@ def build_module(module):
     subprocess.run(command, shell=True)
 
 def get_module_paths(module_name):
-    with open("build_dag.json") as f:
+    with open("build.dag") as f:
         data = json.load(f)
-    for node in data["nodes"]:
-        if node["name"] == module_name:
-            return node["path"]
+    if "nodes" in data:
+        for node in data["nodes"]:
+            if node["name"] == module_name:
+                return node["path"]
     return None
 
 with open("sorted_modules.txt") as f:
