@@ -7,7 +7,16 @@ def build_module(module):
         command = f"mvn clean install -DgroupId={group_id} -DartifactId={artifact_id} -Dversion={version}"
     else:
         command = f"mvn clean install -DartifactId={module}"
-    subprocess.run(command, shell=True)
+    
+    # Capture the output of the build command
+    result = subprocess.run(command, shell=True, capture_output=True, text=True)
+    
+    if result.returncode == 0:
+        print(f"Module {module} built successfully.")
+        print(result.stdout)  # Print the build output
+    else:
+        print(f"Error building module {module}.")
+        print(result.stderr)  # Print any error output
 
 with open("sorted_modules.txt") as f:
     for line in f:
