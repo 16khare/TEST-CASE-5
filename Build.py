@@ -26,7 +26,7 @@ def build_module(module, built_modules):
 # Initialize a set to keep track of built modules
 built_modules = set()
 
-with open("sorted_modules.json") as f:
+with open("sorted_modules.txt") as f:
     data = json.load(f)
     
     for module in data:
