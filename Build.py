@@ -1,5 +1,4 @@
-import json
-import os  # Import the os module
+import os
 import subprocess
 
 def build_module(module):
@@ -11,23 +10,22 @@ def build_module(module):
 
     module_dir = os.path.join(os.getcwd(), artifact_id)
 
-    if os.path.exists(module_dir):
-        print(f"Module {artifact_id} has already been built.")
+    try:
+        if os.path.isdir(module_dir):
+            print(f"Module {artifact_id} has already been built.")
+            return
+    except NameError:
+        print("Error: The 'os' module is not found.")
         return
 
-    # Capture the output of the build command
-    result = subprocess.run(command, shell=True, capture_output=True, text=True)
+    try:
+        result = subprocess.run(command, shell=True, capture_output=True, text=True)
 
-    if result.returncode == 0:
-        print(f"Module {artifact_id} built successfully.")
-        print(result.stdout)  # Print the build output
-    else:
-        print(f"Error building module {artifact_id}.")
-        print(result.stderr)  # Print any error output
-
-with open("sorted_modules.txt") as f:
-    for line in f:
-        module = line.strip()
-        if module:
-            print(f"Building module: {module}")
-            build_module(module)
+        if result.returncode == 0:
+            print(f"Module {artifact_id} built successfully.")
+            print(result.stdout)  # Print the build output
+        else:
+            print(f"Error building module {artifact_id}.")
+            print(result.stderr)  # Print any error output
+    except Exception as e:
+        print(f"An error occurred while building module {artifact_id}: {e}")
