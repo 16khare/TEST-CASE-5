@@ -15,6 +15,3 @@ with open("sorted_modules.txt") as f:
         if module:
             print(f"Building module: {module}")
             build_module(module)
-            path = get_module_paths(module.split(":")[-1])
-            if path:
-                print(f"Module path: {path}")
