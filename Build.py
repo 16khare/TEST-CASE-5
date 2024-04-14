@@ -9,15 +9,6 @@ def build_module(module):
         command = f"mvn clean install -DartifactId={module}"
     subprocess.run(command, shell=True)
 
-def get_module_paths(module_name):
-    with open("build_dag.json") as f:
-        data = json.load(f)
-    if "nodes" in data:
-        for node in data["nodes"]:
-            if node["name"] == module_name:
-                return node["path"]
-    return None
-
 with open("sorted_modules.txt") as f:
     for line in f:
         module = line.strip()
