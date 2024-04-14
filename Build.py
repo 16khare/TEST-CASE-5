@@ -10,7 +10,7 @@ def build_module(module):
     subprocess.run(command, shell=True)
 
 def get_module_paths(module_name):
-    with open("build.dag") as f:
+    with open("build_dag.json") as f:
         data = json.load(f)
     if "nodes" in data:
         for node in data["nodes"]:
