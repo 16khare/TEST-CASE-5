@@ -1,30 +1,28 @@
-import git
-import os
+import json
 import subprocess
 
-# Read module names from sorted_modules.txt
-with open('sorted_modules.txt', 'r') as file:
-    module_names = [line.strip() for line in file]
-
-# Clone the repository
-repo_url = 'git@github.com:16khare/TEST-CASE-5.git'
-repo_dir = 'your_repo'
-git.Repo.clone_from(repo_url, repo_dir)
-
-# Navigate to each module's directory and build it
-repo = git.Repo(repo_dir)
-for module_name in module_names:
-    module_path = os.path.join(repo_dir, module_name)
-
-    # Check if the module directory exists
-    if os.path.isdir(module_path):
-        os.chdir(module_path)
-
-        # Run Maven build command
-        build_command = 'mvn clean install'
-        subprocess.run(build_command, shell=True)
-
-        # Go back to the root directory
-        os.chdir(repo_dir)
+def build_module(module):
+    if ":" in module:
+        group_id, artifact_id, version = module.split(":")
+        command = f"mvn clean install -DgroupId={group_id} -DartifactId={artifact_id} -Dversion={version}"
     else:
-        print(f'Module {module_name} not found in the repository')
+        command = f"mvn clean install -DartifactId={module}"
+    subprocess.run(command, shell=True)
+
+def get_module_paths(module_name):
+    with open("build.dag") as f:
+        data = json.load(f)
+    for node in data["nodes"]:
+        if node["name"] == module_name:
+            return node["path"]
+    return None
+
+with open("sorted_modules.txt") as f:
+    for line in f:
+        module = line.strip()
+        if module:
+            print(f"Building module: {module}")
+            build_module(module)
+            path = get_module_paths(module.split(":")[-1])
+            if path:
+                print(f"Module path: {path}")
