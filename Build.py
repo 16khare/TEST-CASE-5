@@ -1,3 +1,6 @@
+import json
+import subprocess
+
 def build_module(module):
     if ":" in module:
         group_id, artifact_id, version = module.split(":")
