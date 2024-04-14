@@ -7,6 +7,13 @@ def build_module(module):
         command = f"mvn clean install -DgroupId={group_id} -DartifactId={artifact_id} -Dversion={version}"
     else:
         command = f"mvn clean install -DartifactId={module}"
+
+    module_dir = os.path.join(os.getcwd(), artifact_id)
+
+    if os.path.exists(module_dir):
+        print(f"Module {artifact_id} has already been built.")
+        return
+
     
     # Capture the output of the build command
     result = subprocess.run(command, shell=True, capture_output=True, text=True)
