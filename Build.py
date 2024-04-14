@@ -31,3 +31,4 @@ with open("sorted_modules.txt") as f:
         module = line.strip()
         if module:
             print(f"Building module: {module}")
+            build_module(module, built_modules)
